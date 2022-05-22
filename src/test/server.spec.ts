@@ -28,6 +28,33 @@ describe("post api ", function () {
     expect(res.body.key).to.be.a("string");
     expect(res.body.value).to.be.a("string");
   });
+  // assumimng time to live is 10 seconds
+  it("testing the post api with adding a same key after 8 secomds ", async function () {
+    const res = await request.post("/samplekey1");
+    const valueBefore = res.body.value;
+    setTimeout(async ()=>{
+     // call the api with the same key after 8 seconds
+     const res = await request.post("/samplekey1");
+     const valueAfter = res.body.value;
+     expect(valueAfter).to.equal(valueBefore);
+
+    },8000)
+  });
+
+
+  it("testing the post api with adding a same key after 12 secomds ", async function () {
+    const res = await request.post("/samplekey2");
+    const valueBefore = res.body.value;
+    setTimeout(async ()=>{
+     // call the api with the same key after 8 seconds
+     const res = await request.post("/samplekey2");
+     const valueAfter = res.body.value;
+     expect(valueAfter).to.not.equal(valueBefore);
+    },12000)
+  });
+
+
+
 });
 
 describe("delete all keys api ", function () {
@@ -56,5 +83,7 @@ describe("update a single key", function () {
     
     });
   });
+
+  
 
 
