@@ -46,13 +46,13 @@ export class CacheFunctions {
         // if no of items in cache limit reached
         if (result && result.counter >= this.CACHE_LIMIT) {
           console.log("cache limit reached");
-          // least used cache
+          // least used cache with respect to readAt (timestamp)
           const sorted_cache: Array<Cache> | null = await this.db
             .collection(this.COLLECTION)
             .find({})
             .sort({ readAt: 1 })
             .toArray();
-          // update the least frequently used cache
+          // update the least frequently used cache witn respect to time (readAt)
           console.log("cache limit is ",sorted_cache)
           let updatedcacheValue: string = `FASHION-${Math.floor(
             Math.random() * 100 + 1
