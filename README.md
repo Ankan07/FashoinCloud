@@ -2,13 +2,17 @@
 Node js version used to write this code is: 15.2.0
 
 Run 
-npm install
-npm run dev 
-to start the app
+-npm install
+-npm run dev 
+
 the app starts with logging 2 messages
 running on port 4000
 db connected
+
+
+
 once app starts run the test with 
+
 npm run test
 
 
@@ -18,7 +22,7 @@ Please Note: There is a counter collection in the database with a single documen
 
 Postman Collection LInk https://www.getpostman.com/collections/43f072fa7a00eee7cb8a
 
-Note:
--If the no of keys starts to cross the limit 
+Logic  when cache crosses max limit.
+-If the no of keys in the cache starts to cross the limit (say 1000)
 -Extract the key with the lowest timestamp (Least used cache)
--Update the key with the new value
+-Update that extracted key with the new generated value
