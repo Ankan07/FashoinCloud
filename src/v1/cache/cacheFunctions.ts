@@ -53,6 +53,7 @@ export class CacheFunctions {
             .sort({ readAt: 1 })
             .toArray();
           // update the least frequently used cache
+          console.log("cache limit is ",sorted_cache)
           let updatedcacheValue: string = `FASHION-${Math.floor(
             Math.random() * 100 + 1
           )}`;
@@ -168,8 +169,10 @@ export class CacheFunctions {
   async removeAllkeys(req: Request, res: Response) {
     try {
       const key = req.body.key;
-      // find the key
       const result = await this.db.collection(this.COLLECTION).deleteMany({});
+      // reset cache counter to 0
+      await this.db.collection(this.COUNTER).deleteMany({});
+      await this.db.collection(this.COUNTER).insertOne({counter:0});
       res
         .status(200)
         .send({ status: true, message: "Deleted all the key successfully" });
