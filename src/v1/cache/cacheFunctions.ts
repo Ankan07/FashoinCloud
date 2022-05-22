@@ -109,7 +109,9 @@ export class CacheFunctions {
     try {
       const result = await this.db
         .collection(this.COLLECTION)
-        .find({})
+        .find({},{
+          projection: { _id: 0, key: 1 },
+        })
         .toArray();
       res
         .status(200)
