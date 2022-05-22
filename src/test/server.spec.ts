@@ -19,7 +19,7 @@ describe("GET /v1/cache", function () {
 describe("post api ", function () {
   it("testing the post api with adding a new key ", async function () {
     const res = await request.post("/samplekey");
-
+    expect(res.status).to.eql(200);
     expect(res.body).to.be.a("object");
     expect(res.body).to.have.property("status");
     expect(res.body).to.have.property("key");
@@ -60,6 +60,7 @@ describe("post api ", function () {
 describe("delete all keys api ", function () {
   it("testing the delete all api  ", async function () {
     const res = await request.delete("/");
+    expect(res.status).to.eql(200);
     expect(res.body).to.be.a("object");
     expect(res.body).to.have.property("status");
     expect(res.body).to.have.property("message");
@@ -75,6 +76,7 @@ describe("update a single key", function () {
         "key":"test",
         "value":"test_new"
     });
+      expect(res.status).to.eql(200);
       expect(res.body).to.be.a("object");
       expect(res.body).to.have.property("status");
       expect(res.body).to.have.property("message");
@@ -82,6 +84,22 @@ describe("update a single key", function () {
       expect(res.body.message).to.be.a("string");
     
     });
+
+    it("testing the update key with incorrect parameters", async function () {
+        const res = await request.put("/").send({
+          "key":["test"],
+          "value":"test_new"
+        });
+        expect(res.status).to.eql(400);
+        expect(res.body).to.be.a("object");
+        expect(res.body).to.have.property("status");
+        expect(res.body).to.have.property("message");
+        expect(res.body.status).to.be.a("boolean");
+        expect(res.body.message).to.be.a("string");
+        expect(res.body.message).to.equal("Invalid Parameters");
+        expect(res.body.status).to.equal(false);
+      
+      });
   });
 
   
