@@ -2,11 +2,22 @@
 Node js version used to write this code is: 15.2.0
 
 Run 
+
+
 -npm install
+
+
 -npm run dev 
 
+
 the app starts with logging 2 messages
+
+
+
 running on port 4000
+
+
+
 db connected
 
 
