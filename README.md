@@ -1,4 +1,4 @@
-# FashoinCloud
+# FashionCloud
 Node js version used to write this code is: 15.2.0
 
 Run 
