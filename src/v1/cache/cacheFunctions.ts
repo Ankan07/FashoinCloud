@@ -1,6 +1,7 @@
 import { Db, ObjectId } from "mongodb";
 import { Request, Response } from "express";
 import { Cache, Counter } from "../models/Cache";
+import { Validation } from "../../Utils/validation";
 export class CacheFunctions {
   private COLLECTION: string = "cache";
   private COUNTER: string = "counter";
@@ -138,7 +139,9 @@ export class CacheFunctions {
     try {
       const key = req.body.key;
       const value = req.body.value;
-      // find the key
+      const status:boolean = await new Validation().validate(req,res);
+      if(status){
+         // find the key
       const result = await this.db.collection(this.COLLECTION).findOne({ key });
       if (result) {
         const update = await this.db
@@ -150,6 +153,11 @@ export class CacheFunctions {
       } else {
         res.status(200).send({ status: false, message: "Key does not exist" });
       }
+      }
+      else{
+        res.status(400).send({ status: false, message: "Invalid Parameters" });
+      }
+     
     } catch (err) {
       res.status(500).send({ status: false, message: "Internal Server Error" });
     }
