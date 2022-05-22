@@ -5,6 +5,12 @@ Run
 npm install
 npm run dev 
 to start the app
+the app starts with logging 2 messages
+running on port 4000
+db connected
+once app starts run the test with 
+npm run test
+
 
 Database used: MongoDb Atlas cluster 
 
