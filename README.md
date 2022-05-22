@@ -17,3 +17,8 @@ Database used: MongoDb Atlas cluster
 Please Note: There is a counter collection in the database with a single document which keeps track of the number of keys. It's initial value is set to zero.
 
 Postman Collection LInk https://www.getpostman.com/collections/43f072fa7a00eee7cb8a
+
+Note:
+-If the no of keys starts to cross the limit 
+-Extract the key with the lowest timestamp (Least used cache)
+-Update the key with the new value
