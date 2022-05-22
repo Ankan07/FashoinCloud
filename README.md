@@ -2,7 +2,7 @@
 Node js version used to write this code is: 15.2.0
 
 Run 
-npm instal
+npm install
 npm run dev 
 to start the app
 
